@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:how_about_now/firebase_options.dart';
 import 'package:how_about_now/injectable/injectable.dart';
 import 'package:how_about_now/presentation/theme/theme_manager.dart';
 import 'package:how_about_now/presentation/utils/router/app_router.dart';
@@ -9,6 +11,9 @@ import 'package:how_about_now/presentation/utils/translation/generated/l10n.dart
 void main() async {
   await _configureSystemUIOverlays();
   configureDependencies();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const HowAboutNowApp());
 }
 
