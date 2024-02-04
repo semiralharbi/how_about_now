@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:how_about_now/presentation/pages/home_page/home_page.dart';
 import 'package:how_about_now/presentation/theme/app_colors.dart';
 import 'package:how_about_now/presentation/utils/enums/context_extensions.dart';
 import 'package:how_about_now/presentation/widgets/linear_percent_indicator.dart';

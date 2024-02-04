@@ -79,69 +79,59 @@ class _BodyState extends State<_Body> {
     final double adjustedCollapsedHeight = baseCollapsedHeight + (textScaleFactor - 1) * 80;
 
     return CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          SliverAppBar(
-            elevation: 0,
-            scrolledUnderElevation: 2,
-            backgroundColor: AppColors.primary50,
-            pinned: true,
-            expandedHeight: adjustedHeight,
-            collapsedHeight: adjustedCollapsedHeight,
-            flexibleSpace: SafeArea(
-              minimum: const EdgeInsets.only(left: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.tr.homePage_categories,
-                    style: context.tht.bodyLarge,
+      controller: _scrollController,
+      slivers: [
+        SliverAppBar(
+          elevation: 0,
+          scrolledUnderElevation: 2,
+          backgroundColor: AppColors.primary50,
+          pinned: true,
+          expandedHeight: adjustedHeight,
+          collapsedHeight: adjustedCollapsedHeight,
+          flexibleSpace: SafeArea(
+            minimum: const EdgeInsets.only(left: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.tr.homePage_categories,
+                  style: context.tht.bodyLarge,
+                ),
+                const Gap(12),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 4,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) =>
+                        _minimizeCategories ? const MinimizedTaskCategoryCard() : const TaskCategoryCard(),
                   ),
-                  const Gap(12),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: 4,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_, index) =>
-                          _minimizeCategories ? const MinimizedTaskCategoryCard() : const TaskCategoryCard(),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Divider(height: 20),
-                  Text(
-                    context.tr.homePage_todayTasks(10),
-                    style: context.tht.bodyLarge,
-                  ),
-                ],
-              ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Divider(height: 20),
+                Text(
+                  context.tr.homePage_todayTasks(10),
+                  style: context.tht.bodyLarge,
+                ),
+              ],
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: 20,
-              (_, index) => const TaskListTile(),
-            ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            childCount: 20,
+            (_, index) => const TaskListTile(),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }
-
-
-
-
-
-
-
-
-
-
