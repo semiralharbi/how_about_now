@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082990291777",
+    "project_id": "howaboutnow-3ec4c",
+    "storage_bucket": "howaboutnow-3ec4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082990291777:android:cff082b0b9cf57c9c20fc0",
+        "android_client_info": {
+          "package_name": "com.example.how_about_now"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeSnaUjLQLSWhjPKw_3Hc-8YLm96OZK2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
