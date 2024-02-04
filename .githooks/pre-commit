@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+isMerge=$(git rev-parse -q --verify MERGE_HEAD)
+if [ -n "$isMerge" ]; then
+  exit
+fi
+
+dart fix --apply
+
+exts="\.\(dart\)$"
+echo "Pre-commit: formatting changed files"
+
+for file in $(git diff --cached --name-only --diff-filter=ACMR | grep $exts); do
+    echo "Formatting $file"
+    dart format --line-length=120 "$file"
+    git add "$file"
+done

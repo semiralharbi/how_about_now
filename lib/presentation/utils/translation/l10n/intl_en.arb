@@ -1,0 +1,5 @@
+{
+  "homePage_categories":"Categories",
+  "homePage_todayTasks": "Today's tasks: {int}",
+  "homePage_doneTasks": "Done:"
+}
