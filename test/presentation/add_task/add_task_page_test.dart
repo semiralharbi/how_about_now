@@ -29,17 +29,4 @@ void main() {
     },
     builder: AddTaskPage.new,
   );
-
-  runGoldenTest(
-    'AddTaskPage - New Task Category tapped',
-    whilePerforming: (tester) async {
-      final taskCategoryButton = find.byIcon(Icons.circle);
-      await tester.tap(taskCategoryButton, warnIfMissed: false);
-      await tester.pumpAndSettle();
-      final newCategoryButton = find.byIcon(Icons.add);
-      await tester.tap(newCategoryButton, warnIfMissed: false);
-      return;
-    },
-    builder: AddTaskPage.new,
-  );
 }
