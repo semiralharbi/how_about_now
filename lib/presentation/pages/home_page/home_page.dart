@@ -1,11 +1,8 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:how_about_now/presentation/pages/home_page/widgets/minimized_task_category_card.dart';
 import 'package:how_about_now/presentation/pages/home_page/widgets/task_category_card.dart';
 import 'package:how_about_now/presentation/pages/home_page/widgets/task_list_tile.dart';
-import 'package:how_about_now/presentation/theme/app_colors.dart';
-import 'package:how_about_now/presentation/utils/enums/context_extensions.dart';
+import 'package:how_about_now/presentation/utils/global_imports.dart';
+import 'package:how_about_now/presentation/utils/router/app_router.dart';
 import 'package:how_about_now/presentation/widgets/custom_bottom_navigation_bar.dart';
 
 @RoutePage()
@@ -22,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => context.router.push(const AddTaskRoute()),
           child: const Icon(
             Icons.add,
             size: 28,
@@ -71,7 +68,7 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    final double textScaleFactor = context.mq.textScaleFactor;
+    final double textScaleFactor = context.mq.textScaler.scale(1);
 
     const double baseHeight = 160;
     const double baseCollapsedHeight = 100;

@@ -27,6 +27,12 @@ class ThemeManager {
         overlayColor: MaterialStateProperty.all(AppColors.primary800),
       ),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(AppColors.primary1000),
+        textStyle: MaterialStateProperty.all(_lightThemeText.bodyLarge),
+      ),
+    ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       shape: CircleBorder(
         side: BorderSide(
