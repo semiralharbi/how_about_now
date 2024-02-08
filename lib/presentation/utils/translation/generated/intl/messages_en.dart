@@ -24,8 +24,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "homePage_categories":
-            MessageLookupByLibrary.simpleMessage("Categories"),
+        "addTaskCategory_textFieldLabel": MessageLookupByLibrary.simpleMessage("Enter new category name"),
+        "addTaskPage_button": MessageLookupByLibrary.simpleMessage("Add task"),
+        "addTaskPage_generalGroup": MessageLookupByLibrary.simpleMessage("General"),
+        "addTaskPage_textFieldLabel": MessageLookupByLibrary.simpleMessage("Enter new task"),
+        "addTaskPage_today": MessageLookupByLibrary.simpleMessage("Today"),
+        "generic_add": MessageLookupByLibrary.simpleMessage("Add"),
+        "generic_new": MessageLookupByLibrary.simpleMessage("New"),
+        "generic_ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "generic_reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "homePage_categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "homePage_doneTasks": MessageLookupByLibrary.simpleMessage("Done:"),
         "homePage_todayTasks": m0
       };

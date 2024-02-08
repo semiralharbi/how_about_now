@@ -1,5 +1,14 @@
 {
-  "homePage_categories":"Categories",
+  "homePage_categories": "Categories",
   "homePage_todayTasks": "Today's tasks: {int}",
-  "homePage_doneTasks": "Done:"
+  "homePage_doneTasks": "Done:",
+  "addTaskPage_generalGroup": "General",
+  "addTaskPage_textFieldLabel": "Enter new task",
+  "addTaskCategory_textFieldLabel": "Enter new category name",
+  "addTaskPage_button": "Add task",
+  "addTaskPage_today": "Today",
+  "generic_ok": "Ok",
+  "generic_reset": "Reset",
+  "generic_new": "New",
+  "generic_add": "Add"
 }

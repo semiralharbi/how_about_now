@@ -1,13 +1,13 @@
 name: how_about_now
-description: A new Flutter project.
+description: To-do App.
 
 publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
-
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ^3.16.9
 
 dependencies:
   flutter:

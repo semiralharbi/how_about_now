@@ -26,9 +26,7 @@ class Translation {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<Translation> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -75,6 +73,96 @@ class Translation {
     return Intl.message(
       'Done:',
       name: 'homePage_doneTasks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General`
+  String get addTaskPage_generalGroup {
+    return Intl.message(
+      'General',
+      name: 'addTaskPage_generalGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new task`
+  String get addTaskPage_textFieldLabel {
+    return Intl.message(
+      'Enter new task',
+      name: 'addTaskPage_textFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new category name`
+  String get addTaskCategory_textFieldLabel {
+    return Intl.message(
+      'Enter new category name',
+      name: 'addTaskCategory_textFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add task`
+  String get addTaskPage_button {
+    return Intl.message(
+      'Add task',
+      name: 'addTaskPage_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get addTaskPage_today {
+    return Intl.message(
+      'Today',
+      name: 'addTaskPage_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get generic_ok {
+    return Intl.message(
+      'Ok',
+      name: 'generic_ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get generic_reset {
+    return Intl.message(
+      'Reset',
+      name: 'generic_reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get generic_new {
+    return Intl.message(
+      'New',
+      name: 'generic_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get generic_add {
+    return Intl.message(
+      'Add',
+      name: 'generic_add',
       desc: '',
       args: [],
     );
