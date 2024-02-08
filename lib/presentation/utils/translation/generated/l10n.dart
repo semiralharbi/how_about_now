@@ -167,6 +167,46 @@ class Translation {
       args: [],
     );
   }
+
+  /// `Something went wrong`
+  String get generic_somethingWentWrong {
+    return Intl.message(
+      'Something went wrong',
+      name: 'generic_somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found`
+  String get generic_userNotFound {
+    return Intl.message(
+      'User not found',
+      name: 'generic_userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your Internet Connection and try again later`
+  String get generic_checkInternetConnection {
+    return Intl.message(
+      'Check your Internet Connection and try again later',
+      name: 'generic_checkInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field can't be empty`
+  String get generic_fieldCantBeEmpty {
+    return Intl.message(
+      'This field can\'t be empty',
+      name: 'generic_fieldCantBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Translation> {
