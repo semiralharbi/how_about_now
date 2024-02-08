@@ -20,7 +20,7 @@ void main() {
     });
 
     blocTest<AppCubit, AppState>(
-      'emits [loading, success] when checkUser succeeds',
+      'emits [] when checkUser succeeds',
       build: () {
         when(mockRepository.checkUser()).thenAnswer((_) => Future.value());
         return cubit;
@@ -30,7 +30,7 @@ void main() {
     );
 
     blocTest<AppCubit, AppState>(
-      'emits [loading, failure] when checkUser throws an error',
+      'emits [] when checkUser throws an error',
       build: () {
         when(mockRepository.checkUser()).thenThrow(Exception('Error'));
         return cubit;
