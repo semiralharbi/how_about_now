@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:how_about_now/injectable/injectable.dart';
+import 'package:how_about_now/injectable/modules/tests_manager.dart';
 import 'package:how_about_now/presentation/theme/app_colors.dart';
 import 'package:how_about_now/presentation/utils/enums/context_extensions.dart';
 
@@ -7,6 +9,7 @@ Future<DateTime?> showCalendarPicker(
 ) async =>
     showDatePicker(
       context: context,
+      initialDate: getIt<TestsManager>().duringTestExecution ? DateTime(2060) : DateTime.now(),
       locale: Localizations.localeOf(context),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
