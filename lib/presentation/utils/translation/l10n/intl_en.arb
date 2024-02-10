@@ -10,5 +10,9 @@
   "generic_ok": "Ok",
   "generic_reset": "Reset",
   "generic_new": "New",
-  "generic_add": "Add"
+  "generic_add": "Add",
+  "generic_somethingWentWrong": "Something went wrong",
+  "generic_userNotFound": "User not found",
+  "generic_checkInternetConnection": "Check your Internet Connection and try again later",
+  "generic_fieldCantBeEmpty": "This field can't be empty"
 }
