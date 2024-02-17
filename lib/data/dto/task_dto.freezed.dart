@@ -20,6 +20,7 @@ TaskDto _$TaskDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TaskDto {
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ mixin _$TaskDto {
 abstract class $TaskDtoCopyWith<$Res> {
   factory $TaskDtoCopyWith(TaskDto value, $Res Function(TaskDto) then) = _$TaskDtoCopyWithImpl<$Res, TaskDto>;
   @useResult
-  $Res call({String title, String category, String color, @TimestampConverter() DateTime date, bool isCompleted});
+  $Res call(
+      {String id, String title, String category, String color, @TimestampConverter() DateTime date, bool isCompleted});
 }
 
 /// @nodoc
@@ -51,6 +53,7 @@ class _$TaskDtoCopyWithImpl<$Res, $Val extends TaskDto> implements $TaskDtoCopyW
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? category = null,
     Object? color = null,
@@ -58,6 +61,10 @@ class _$TaskDtoCopyWithImpl<$Res, $Val extends TaskDto> implements $TaskDtoCopyW
     Object? isCompleted = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -88,7 +95,8 @@ abstract class _$$TaskDtoImplCopyWith<$Res> implements $TaskDtoCopyWith<$Res> {
       __$$TaskDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String category, String color, @TimestampConverter() DateTime date, bool isCompleted});
+  $Res call(
+      {String id, String title, String category, String color, @TimestampConverter() DateTime date, bool isCompleted});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$TaskDtoImplCopyWithImpl<$Res> extends _$TaskDtoCopyWithImpl<$Res, _$Ta
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? category = null,
     Object? color = null,
@@ -106,6 +115,10 @@ class __$$TaskDtoImplCopyWithImpl<$Res> extends _$TaskDtoCopyWithImpl<$Res, _$Ta
     Object? isCompleted = null,
   }) {
     return _then(_$TaskDtoImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -134,7 +147,8 @@ class __$$TaskDtoImplCopyWithImpl<$Res> extends _$TaskDtoCopyWithImpl<$Res, _$Ta
 @JsonSerializable()
 class _$TaskDtoImpl implements _TaskDto {
   const _$TaskDtoImpl(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.category,
       required this.color,
       @TimestampConverter() required this.date,
@@ -142,6 +156,8 @@ class _$TaskDtoImpl implements _TaskDto {
 
   factory _$TaskDtoImpl.fromJson(Map<String, dynamic> json) => _$$TaskDtoImplFromJson(json);
 
+  @override
+  final String id;
   @override
   final String title;
   @override
@@ -156,7 +172,7 @@ class _$TaskDtoImpl implements _TaskDto {
 
   @override
   String toString() {
-    return 'TaskDto(title: $title, category: $category, color: $color, date: $date, isCompleted: $isCompleted)';
+    return 'TaskDto(id: $id, title: $title, category: $category, color: $color, date: $date, isCompleted: $isCompleted)';
   }
 
   @override
@@ -164,6 +180,7 @@ class _$TaskDtoImpl implements _TaskDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskDtoImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.category, category) || other.category == category) &&
             (identical(other.color, color) || other.color == color) &&
@@ -173,7 +190,7 @@ class _$TaskDtoImpl implements _TaskDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, category, color, date, isCompleted);
+  int get hashCode => Object.hash(runtimeType, id, title, category, color, date, isCompleted);
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +207,8 @@ class _$TaskDtoImpl implements _TaskDto {
 
 abstract class _TaskDto implements TaskDto {
   const factory _TaskDto(
-      {required final String title,
+      {required final String id,
+      required final String title,
       required final String category,
       required final String color,
       @TimestampConverter() required final DateTime date,
@@ -198,6 +216,8 @@ abstract class _TaskDto implements TaskDto {
 
   factory _TaskDto.fromJson(Map<String, dynamic> json) = _$TaskDtoImpl.fromJson;
 
+  @override
+  String get id;
   @override
   String get title;
   @override

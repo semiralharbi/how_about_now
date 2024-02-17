@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:how_about_now/presentation/theme/app_colors.dart';
 
 class LinearPercentIndicator extends StatelessWidget {
-  const LinearPercentIndicator({super.key, this.percent = 0.3});
+  const LinearPercentIndicator({super.key, required this.percent});
 
   final double percent;
 

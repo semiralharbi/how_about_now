@@ -4,18 +4,24 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:typed_data' as _i9;
+import 'dart:typed_data' as _i11;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i4;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart' as _i3;
 import 'package:firebase_core/firebase_core.dart' as _i2;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i12;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i18;
 import 'package:how_about_now/cubit/app_cubit.dart' as _i6;
-import 'package:how_about_now/domain/data_source/authentication_data_source.dart' as _i11;
-import 'package:how_about_now/domain/repositories/authentication_repository.dart' as _i10;
+import 'package:how_about_now/data/dto/task_category_dto.dart' as _i16;
+import 'package:how_about_now/data/dto/task_dto.dart' as _i15;
+import 'package:how_about_now/domain/data_source/authentication_data_source.dart' as _i13;
+import 'package:how_about_now/domain/data_source/tasks_data_source.dart' as _i17;
+import 'package:how_about_now/domain/repositories/authentication_repository.dart' as _i12;
+import 'package:how_about_now/domain/repositories/tasks_repository.dart' as _i14;
+import 'package:how_about_now/presentation/pages/add_task/cubit/add_task_cubit.dart' as _i7;
+import 'package:how_about_now/presentation/pages/home_page/cubit/home_cubit.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
-import 'package:shared_preferences/shared_preferences.dart' as _i7;
+import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:shared_preferences/shared_preferences.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -160,10 +166,30 @@ class _FakeAppState_12 extends _i1.SmartFake implements _i6.AppState {
         );
 }
 
+class _FakeAddTaskState_13 extends _i1.SmartFake implements _i7.AddTaskState {
+  _FakeAddTaskState_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeHomeState_14 extends _i1.SmartFake implements _i8.HomeState {
+  _FakeHomeState_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [SharedPreferences].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i7.SharedPreferences {
+class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
   MockSharedPreferences() {
     _i1.throwOnMissingStub(this);
   }
@@ -369,7 +395,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
   @override
   String get databaseURL => (super.noSuchMethod(
         Invocation.getter(#databaseURL),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#databaseURL),
         ),
@@ -459,7 +485,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
       ) as _i5.Future<void>);
 
   @override
-  _i4.LoadBundleTask loadBundle(_i9.Uint8List? bundle) => (super.noSuchMethod(
+  _i4.LoadBundleTask loadBundle(_i11.Uint8List? bundle) => (super.noSuchMethod(
         Invocation.method(
           #loadBundle,
           [bundle],
@@ -622,8 +648,8 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
             #maxAttempts: maxAttempts,
           },
         ),
-        returnValue: _i8.ifNotNull(
-              _i8.dummyValueOrNull<T>(
+        returnValue: _i10.ifNotNull(
+              _i10.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #runTransaction,
@@ -710,7 +736,7 @@ class MockCollectionReference<T extends Object?> extends _i1.Mock implements _i4
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -719,7 +745,7 @@ class MockCollectionReference<T extends Object?> extends _i1.Mock implements _i4
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -1194,7 +1220,7 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock implements _i4.D
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -1212,7 +1238,7 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock implements _i4.D
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -1326,7 +1352,7 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock implements _i4.D
 /// A class which mocks [AuthenticationRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthenticationRepository extends _i1.Mock implements _i10.AuthenticationRepository {
+class MockAuthenticationRepository extends _i1.Mock implements _i12.AuthenticationRepository {
   MockAuthenticationRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -1345,7 +1371,7 @@ class MockAuthenticationRepository extends _i1.Mock implements _i10.Authenticati
 /// A class which mocks [AuthenticationDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthenticationDataSource extends _i1.Mock implements _i11.AuthenticationDataSource {
+class MockAuthenticationDataSource extends _i1.Mock implements _i13.AuthenticationDataSource {
   MockAuthenticationDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -1359,6 +1385,109 @@ class MockAuthenticationDataSource extends _i1.Mock implements _i11.Authenticati
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+}
+
+/// A class which mocks [TasksRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTasksRepository extends _i1.Mock implements _i14.TasksRepository {
+  MockTasksRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<void> createTask(_i15.TaskDto? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #createTask,
+          [dto],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<List<_i15.TaskDto>> getTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #getTasks,
+          [],
+        ),
+        returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
+      ) as _i5.Future<List<_i15.TaskDto>>);
+
+  @override
+  _i5.Future<List<_i16.TaskCategoryDto>> getTasksCategories() => (super.noSuchMethod(
+        Invocation.method(
+          #getTasksCategories,
+          [],
+        ),
+        returnValue: _i5.Future<List<_i16.TaskCategoryDto>>.value(<_i16.TaskCategoryDto>[]),
+      ) as _i5.Future<List<_i16.TaskCategoryDto>>);
+
+  @override
+  _i5.Future<List<_i15.TaskDto>> getTasksByCategory(String? category) => (super.noSuchMethod(
+        Invocation.method(
+          #getTasksByCategory,
+          [category],
+        ),
+        returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
+      ) as _i5.Future<List<_i15.TaskDto>>);
+
+  @override
+  _i5.Future<void> deleteTask(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteTask,
+          [id],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+}
+
+/// A class which mocks [TasksDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTasksDataSource extends _i1.Mock implements _i17.TasksDataSource {
+  MockTasksDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<void> createTask(_i15.TaskDto? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #createTask,
+          [dto],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<List<_i15.TaskDto>> getTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #getTasks,
+          [],
+        ),
+        returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
+      ) as _i5.Future<List<_i15.TaskDto>>);
+
+  @override
+  _i5.Future<void> deleteTask(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteTask,
+          [id],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<List<_i15.TaskDto>> getTasksByCategory(String? category) => (super.noSuchMethod(
+        Invocation.method(
+          #getTasksByCategory,
+          [category],
+        ),
+        returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
+      ) as _i5.Future<List<_i15.TaskDto>>);
 }
 
 /// A class which mocks [AppCubit].
@@ -1410,7 +1539,219 @@ class MockAppCubit extends _i1.Mock implements _i6.AppCubit {
       );
 
   @override
-  void onChange(_i12.Change<_i6.AppState>? change) => super.noSuchMethod(
+  void onChange(_i18.Change<_i6.AppState>? change) => super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+}
+
+/// A class which mocks [AddTaskCubit].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAddTaskCubit extends _i1.Mock implements _i7.AddTaskCubit {
+  MockAddTaskCubit() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.AddTaskState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeAddTaskState_13(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i7.AddTaskState);
+
+  @override
+  _i5.Stream<_i7.AddTaskState> get stream => (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i7.AddTaskState>.empty(),
+      ) as _i5.Stream<_i7.AddTaskState>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i5.Future<void> createTask({
+    required String? title,
+    required String? category,
+    required String? color,
+    required DateTime? date,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createTask,
+          [],
+          {
+            #title: title,
+            #category: category,
+            #color: color,
+            #date: date,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void emit(_i7.AddTaskState? state) => super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(_i18.Change<_i7.AddTaskState>? change) => super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+}
+
+/// A class which mocks [HomeCubit].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHomeCubit extends _i1.Mock implements _i8.HomeCubit {
+  MockHomeCubit() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.HomeState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeHomeState_14(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i8.HomeState);
+
+  @override
+  _i5.Stream<_i8.HomeState> get stream => (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i8.HomeState>.empty(),
+      ) as _i5.Stream<_i8.HomeState>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i5.Future<void> getTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #getTasks,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void emit(_i8.HomeState? state) => super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(_i18.Change<_i8.HomeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],

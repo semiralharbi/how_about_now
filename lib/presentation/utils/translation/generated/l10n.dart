@@ -58,13 +58,13 @@ class Translation {
     );
   }
 
-  /// `Today's tasks: {int}`
-  String homePage_todayTasks(Object int) {
+  /// `Today's tasks: {String}`
+  String homePage_todayTasks(Object String) {
     return Intl.message(
-      'Today\'s tasks: $int',
+      'Today\'s tasks: $String',
       name: 'homePage_todayTasks',
       desc: '',
-      args: [int],
+      args: [String],
     );
   }
 
@@ -203,6 +203,16 @@ class Translation {
     return Intl.message(
       'This field can\'t be empty',
       name: 'generic_fieldCantBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The task has been added`
+  String get addTaskPage_successSnackbar {
+    return Intl.message(
+      'The task has been added',
+      name: 'addTaskPage_successSnackbar',
       desc: '',
       args: [],
     );
