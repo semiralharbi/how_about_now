@@ -1,6 +1,6 @@
 {
   "homePage_categories": "Categories",
-  "homePage_todayTasks": "Today's tasks: {int}",
+  "homePage_todayTasks": "Today's tasks: {String}",
   "homePage_doneTasks": "Done:",
   "addTaskPage_generalGroup": "General",
   "addTaskPage_textFieldLabel": "Enter new task",
@@ -14,5 +14,6 @@
   "generic_somethingWentWrong": "Something went wrong",
   "generic_userNotFound": "User not found",
   "generic_checkInternetConnection": "Check your Internet Connection and try again later",
-  "generic_fieldCantBeEmpty": "This field can't be empty"
+  "generic_fieldCantBeEmpty": "This field can't be empty",
+  "addTaskPage_successSnackbar": "The task has been added"
 }

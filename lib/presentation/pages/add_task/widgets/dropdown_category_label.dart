@@ -21,9 +21,14 @@ class DropdownCategoryLabel extends StatelessWidget {
           color: selectedColor ?? AppColors.primary1000,
         ),
         const Gap(10),
-        Text(
-          selectedCategory ?? context.tr.addTaskPage_generalGroup,
-          style: context.tht.bodyLarge?.copyWith(color: AppColors.primary1000),
+        Flexible(
+          child: SizedBox(
+            width: 80,
+            child: Text(
+              selectedCategory ?? context.tr.addTaskPage_generalGroup,
+              style: context.tht.bodyLarge?.copyWith(color: AppColors.primary1000),
+            ),
+          ),
         ),
       ],
     );

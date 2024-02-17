@@ -20,13 +20,14 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(int) => "Today\'s tasks: ${int}";
+  static String m0(String) => "Today\'s tasks: ${String}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addTaskCategory_textFieldLabel": MessageLookupByLibrary.simpleMessage("Enter new category name"),
         "addTaskPage_button": MessageLookupByLibrary.simpleMessage("Add task"),
         "addTaskPage_generalGroup": MessageLookupByLibrary.simpleMessage("General"),
+        "addTaskPage_successSnackbar": MessageLookupByLibrary.simpleMessage("The task has been added"),
         "addTaskPage_textFieldLabel": MessageLookupByLibrary.simpleMessage("Enter new task"),
         "addTaskPage_today": MessageLookupByLibrary.simpleMessage("Today"),
         "generic_add": MessageLookupByLibrary.simpleMessage("Add"),

@@ -1,142 +1,104 @@
+import 'package:how_about_now/data/dto/task_category_dto.dart';
 import 'package:how_about_now/presentation/pages/add_task/widgets/add_task_category_dialog.dart';
 import 'package:how_about_now/presentation/pages/add_task/widgets/dropdown_category_label.dart';
 import 'package:how_about_now/presentation/utils/global_imports.dart';
 
 class TaskCategoryDropdown extends StatefulWidget {
-  const TaskCategoryDropdown({super.key});
+  const TaskCategoryDropdown({
+    super.key,
+    required this.categories,
+    required this.onSelectedCategory,
+  });
+
+  final List<TaskCategoryDto> categories;
+  final void Function(TaskCategoryDto) onSelectedCategory;
 
   @override
   TaskCategoryDropdownState createState() => TaskCategoryDropdownState();
 }
 
 class TaskCategoryDropdownState extends State<TaskCategoryDropdown> {
-  //TODO: remove later
-  final List<Map<String, dynamic>> categories = [
-    {
-      'title': 'General',
-      'color': 0xFF000080,
-    },
-    {
-      'title': 'Work',
-      'color': 0xFF0000d6,
-    },
-    {
-      'title': 'Office',
-      'color': 0xFFd602ee,
-    },
-    {
-      'title': 'Example',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-    {
-      'title': 'Expaple',
-      'color': 0xFF09af00,
-    },
-  ];
-  Map<String, dynamic>? selectedCategory;
+  late TaskCategoryDto _initialCategory;
+  late List<TaskCategoryDto> _categories;
 
   @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: null,
-      style: ButtonStyle(
-        side: MaterialStateProperty.all(
-          const BorderSide(color: AppColors.primary1000),
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<Map<String, dynamic>>(
-          iconSize: 0,
-          isDense: true,
-          menuMaxHeight: 200,
-          borderRadius: BorderRadius.circular(16),
-          hint: DropdownCategoryLabel(
-            selectedCategory: selectedCategory?['title'],
-            selectedColor: Color(selectedCategory?['color'] ?? 0xFF000080),
-          ),
-          value: selectedCategory,
-          items: [
-            DropdownMenuItem<Map<String, dynamic>>(
-              value: const {'add_category': true},
-              child: Row(
-                children: [
-                  const Icon(Icons.add, color: AppColors.primary1000),
-                  const Gap(10),
-                  Text(
-                    context.tr.generic_new,
-                    style: context.tht.bodyLarge?.copyWith(color: AppColors.primary900),
-                  ),
-                ],
-              ),
-            ),
-            ...categories.map<DropdownMenuItem<Map<String, dynamic>>>((Map<String, dynamic> value) {
-              return DropdownMenuItem<Map<String, dynamic>>(
-                value: value,
-                child: DropdownCategoryLabel(
-                  selectedCategory: value['title'],
-                  selectedColor: Color(value['color'] ?? 0xFF000080),
-                ),
-              );
-            }),
-          ],
-          onChanged: (Map<String, dynamic>? newValue) {
-            if (newValue?['add_category'] == true) {
-              showDialog(
-                context: context,
-                builder: (context) => const AddTaskCategoryDialog(),
-              );
-              return;
-            }
-            setState(() {
-              selectedCategory = newValue;
-            });
-          },
-        ),
-      ),
+  void initState() {
+    super.initState();
+    _initialCategory = widget.categories.firstWhere(
+      (category) => category.name == 'General',
+      orElse: TaskCategoryDto.general,
     );
+    if (widget.categories.isNotEmpty) {
+      _categories = [...widget.categories];
+      if (!_categories.any((element) => element.name == 'General')) {
+        _categories.add(_initialCategory);
+      }
+    } else {
+      _categories = [_initialCategory];
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => OutlinedButton(
+        onPressed: null,
+        style: ButtonStyle(
+          side: MaterialStateProperty.all(
+            const BorderSide(color: AppColors.primary1000),
+          ),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<TaskCategoryDto>(
+            iconSize: 0,
+            isDense: true,
+            menuMaxHeight: 200,
+            borderRadius: BorderRadius.circular(16),
+            hint: DropdownCategoryLabel(
+              selectedCategory: _initialCategory.name,
+              selectedColor: Color(int.parse(_initialCategory.color)),
+            ),
+            value: _initialCategory,
+            items: [
+              DropdownMenuItem<TaskCategoryDto>(
+                value: TaskCategoryDto.empty(),
+                child: Row(
+                  children: [
+                    const Icon(Icons.add, color: AppColors.primary1000),
+                    const Gap(10),
+                    Text(
+                      context.tr.generic_new,
+                      style: context.tht.bodyLarge?.copyWith(color: AppColors.primary900),
+                    ),
+                  ],
+                ),
+              ),
+              ..._categories.map<DropdownMenuItem<TaskCategoryDto>>((TaskCategoryDto value) {
+                return DropdownMenuItem<TaskCategoryDto>(
+                  value: value,
+                  child: DropdownCategoryLabel(
+                    selectedCategory: value.name,
+                    selectedColor: Color(int.parse(value.color)),
+                  ),
+                );
+              }),
+            ],
+            onChanged: _onChanged,
+          ),
+        ),
+      );
+
+  void _onChanged(TaskCategoryDto? newValue) {
+    if (newValue != null) {
+      if (newValue.name.isEmpty) {
+        showDialog(
+          context: context,
+          builder: (context) => const AddTaskCategoryDialog(),
+        );
+        return;
+      }
+      setState(() {
+        _initialCategory = newValue;
+        widget.onSelectedCategory(_initialCategory);
+      });
+    }
   }
 }
