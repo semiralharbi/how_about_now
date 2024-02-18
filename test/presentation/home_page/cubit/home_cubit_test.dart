@@ -21,7 +21,7 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'emits [loaded] when tasks successfully fetched',
       setUp: () {
-        when(mockRepository.getTasks()).thenAnswer((_) async => tasksListV1);
+        when(mockRepository.getTasks()).thenAnswer((_) => Stream.value(tasksListV1));
         when(mockRepository.getTasksCategories()).thenAnswer((_) async => taskCategoriesList);
       },
       build: () => cubit,
@@ -55,7 +55,7 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'emits [error] when getTasksCategories throws an error',
       setUp: () {
-        when(mockRepository.getTasks()).thenAnswer((_) async => tasksListV1);
+        when(mockRepository.getTasks()).thenAnswer((_) => Stream.value(tasksListV1));
         when(mockRepository.getTasksCategories()).thenThrow(ApiException(Errors.somethingWentWrong));
       },
       build: () => cubit,

@@ -15,6 +15,7 @@ class TasksDataSourceImpl extends TasksDataSource {
   final FirebaseFirestore _firestore;
   final SharedPreferences _sharedPreferences;
   final String _categoryField = 'category';
+  final String _isCompletedField = 'isCompleted';
 
   @override
   Future<void> createTask(TaskDto dto) async {
@@ -39,12 +40,11 @@ class TasksDataSourceImpl extends TasksDataSource {
   }
 
   @override
-  Future<List<TaskDto>> getTasks() async {
+  Stream<List<TaskDto>> getTasks() {
     try {
       final userId = _sharedPreferences.getString(SharedPreferencesConsts.userIdKey);
-      final snapshot = await _firestore.collection(userId!).get();
-      final tasks = snapshot.docs.map((e) => TaskDto.fromJson(e.data())).toList();
-      return tasks;
+      final snapshot = _firestore.collection(userId!).snapshots();
+      return snapshot.map((event) => event.docs.map((e) => TaskDto.fromJson(e.data())).toList());
     } catch (e, stack) {
       debugPrint('There was an error while fetching tasks: $e, stack: $stack');
       throw ApiException(Errors.somethingWentWrong);
@@ -68,7 +68,7 @@ class TasksDataSourceImpl extends TasksDataSource {
   Future<void> completeTask({required String id, required bool isCompleted}) async {
     try {
       final userId = _sharedPreferences.getString(SharedPreferencesConsts.userIdKey);
-      await _firestore.collection(userId!).doc(id).update({'isCompleted': isCompleted});
+      await _firestore.collection(userId!).doc(id).update({_isCompletedField: isCompleted});
     } catch (e, stack) {
       debugPrint('There was an error while updating the task: $e, stack: $stack');
       throw ApiException(Errors.somethingWentWrong);

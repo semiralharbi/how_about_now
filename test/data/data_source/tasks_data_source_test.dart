@@ -56,9 +56,9 @@ void main() {
           docPath: task.id,
         );
       }
-      final result = await dataSource.getTasks();
+      final result = dataSource.getTasks();
 
-      expect(result, tasksListV1);
+      expect(await result.first, tasksListV1);
     });
 
     test('getTasksByCategory fetches tasks by category from FirebaseFirestore', () async {
