@@ -88,7 +88,15 @@ class TaskCategoryDropdownState extends State<TaskCategoryDropdown> {
       if (newValue.name.isEmpty) {
         showDialog(
           context: context,
-          builder: (context) => const AddTaskCategoryDialog(),
+          builder: (context) => AddTaskCategoryDialog(
+            onAddTap: (category, color) {
+              final createdCategory = TaskCategoryDto(name: category, color: color, tasks: []);
+              setState(() {
+                _categories.add(createdCategory);
+                _initialCategory = createdCategory;
+              });
+            },
+          ),
         );
         return;
       }

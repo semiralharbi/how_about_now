@@ -22,8 +22,8 @@ class DropdownCategoryLabel extends StatelessWidget {
         ),
         const Gap(10),
         Flexible(
-          child: SizedBox(
-            width: 80,
+          child: Container(
+            constraints: const BoxConstraints(minWidth: 20, maxWidth: 100),
             child: Text(
               selectedCategory ?? context.tr.addTaskPage_generalGroup,
               style: context.tht.bodyLarge?.copyWith(color: AppColors.primary1000),
