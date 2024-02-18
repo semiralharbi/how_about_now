@@ -35,16 +35,16 @@ void main() {
     });
 
     test('getTasks delegates to TasksDataSource', () async {
-      when(mockDataSource.getTasks()).thenAnswer((_) async => tasksListV1);
+      when(mockDataSource.getTasks()).thenAnswer((_) => Stream.value(tasksListV1));
 
-      final result = await repository.getTasks();
+      final result = repository.getTasks();
 
-      expect(result, tasksListV1);
+      expect(await result.first, tasksListV1);
       verify(mockDataSource.getTasks());
     });
 
     test('should return a list with "General" and "All Tasks" categories when no tasks are present', () async {
-      when(mockDataSource.getTasks()).thenAnswer((_) async => []);
+      when(mockDataSource.getTasks()).thenAnswer((_) => Stream.value([]));
 
       final categories = await repository.getTasksCategories();
 
@@ -54,7 +54,7 @@ void main() {
     });
 
     test('should include a "Today" category if there are tasks for today', () async {
-      when(mockDataSource.getTasks()).thenAnswer((_) async => [taskForToday]);
+      when(mockDataSource.getTasks()).thenAnswer((_) => Stream.value([taskForToday]));
 
       final categories = await repository.getTasksCategories();
 

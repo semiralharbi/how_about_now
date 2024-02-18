@@ -1406,13 +1406,13 @@ class MockTasksRepository extends _i1.Mock implements _i14.TasksRepository {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<List<_i15.TaskDto>> getTasks() => (super.noSuchMethod(
+  _i5.Stream<List<_i15.TaskDto>> getTasks() => (super.noSuchMethod(
         Invocation.method(
           #getTasks,
           [],
         ),
-        returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
-      ) as _i5.Future<List<_i15.TaskDto>>);
+        returnValue: _i5.Stream<List<_i15.TaskDto>>.empty(),
+      ) as _i5.Stream<List<_i15.TaskDto>>);
 
   @override
   _i5.Future<void> completeTask({
@@ -1480,13 +1480,13 @@ class MockTasksDataSource extends _i1.Mock implements _i17.TasksDataSource {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<List<_i15.TaskDto>> getTasks() => (super.noSuchMethod(
+  _i5.Stream<List<_i15.TaskDto>> getTasks() => (super.noSuchMethod(
         Invocation.method(
           #getTasks,
           [],
         ),
-        returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
-      ) as _i5.Future<List<_i15.TaskDto>>);
+        returnValue: _i5.Stream<List<_i15.TaskDto>>.empty(),
+      ) as _i5.Stream<List<_i15.TaskDto>>);
 
   @override
   _i5.Future<void> completeTask({

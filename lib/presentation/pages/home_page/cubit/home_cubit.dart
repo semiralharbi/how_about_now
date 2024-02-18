@@ -20,9 +20,14 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getTasks() async {
     emit(const HomeState.loading());
     try {
-      final tasks = await _tasksRepository.getTasks();
-      final categories = await _tasksRepository.getTasksCategories();
-      emit(HomeState.loaded(tasks: tasks, categories: categories));
+      _tasksRepository.getTasks().listen((tasks) async {
+        try {
+          final categories = await _tasksRepository.getTasksCategories();
+          emit(HomeState.loaded(tasks: tasks, categories: categories));
+        } on ApiException catch (e) {
+          emit(HomeState.error(e.error));
+        }
+      });
     } on ApiException catch (e) {
       emit(HomeState.error(e.error));
     }

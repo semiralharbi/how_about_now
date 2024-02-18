@@ -31,7 +31,7 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<List<TaskDto>> getTasks() async {
+  Stream<List<TaskDto>> getTasks() {
     try {
       return _tasksDataSource.getTasks();
     } catch (_) {
@@ -51,7 +51,7 @@ class TasksRepositoryImpl implements TasksRepository {
   @override
   Future<List<TaskCategoryDto>> getTasksCategories() async {
     try {
-      final allTasks = await _tasksDataSource.getTasks();
+      final allTasks = await _tasksDataSource.getTasks().first;
 
       final List<TaskCategoryDto> categoriesList = [];
 
