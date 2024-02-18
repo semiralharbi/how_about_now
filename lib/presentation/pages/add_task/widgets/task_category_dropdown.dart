@@ -24,18 +24,15 @@ class TaskCategoryDropdownState extends State<TaskCategoryDropdown> {
   @override
   void initState() {
     super.initState();
-    _initialCategory = widget.categories.firstWhere(
-      (category) => category.name == 'General',
-      orElse: TaskCategoryDto.general,
-    );
-    if (widget.categories.isNotEmpty) {
-      _categories = [...widget.categories];
-      if (!_categories.any((element) => element.name == 'General')) {
-        _categories.add(_initialCategory);
-      }
-    } else {
-      _categories = [_initialCategory];
-    }
+    _initializeCategories();
+    _initialCategory = widget.categories.firstWhere((category) => category.isGeneralCategory);
+  }
+
+  void _initializeCategories() {
+    _categories = List.from(widget.categories);
+    _categories
+      ..removeWhere((cat) => cat.isAllTasksCategory)
+      ..removeWhere((cat) => cat.isTodayCategory);
   }
 
   @override

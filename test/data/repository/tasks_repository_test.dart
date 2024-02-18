@@ -43,6 +43,25 @@ void main() {
       verify(mockDataSource.getTasks());
     });
 
+    test('should return a list with "General" and "All Tasks" categories when no tasks are present', () async {
+      when(mockDataSource.getTasks()).thenAnswer((_) async => []);
+
+      final categories = await repository.getTasksCategories();
+
+      expect(categories.length, 2);
+      expect(categories.first.name, 'All Tasks');
+      expect(categories[1].name, 'General');
+    });
+
+    test('should include a "Today" category if there are tasks for today', () async {
+      when(mockDataSource.getTasks()).thenAnswer((_) async => [taskForToday]);
+
+      final categories = await repository.getTasksCategories();
+
+      expect(categories.first.name, 'Today');
+      expect(categories.length, greaterThanOrEqualTo(3));
+    });
+
     test('createTask propagates exception from DataSource', () async {
       when(mockDataSource.createTask(any)).thenThrow(ApiException(Errors.somethingWentWrong));
 

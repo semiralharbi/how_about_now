@@ -68,13 +68,13 @@ class Translation {
     );
   }
 
-  /// `Done:`
-  String get homePage_doneTasks {
+  /// `Done: {int} / {double}`
+  String homePage_doneTasks(Object int, Object double) {
     return Intl.message(
-      'Done:',
+      'Done: $int / $double',
       name: 'homePage_doneTasks',
       desc: '',
-      args: [],
+      args: [int, double],
     );
   }
 

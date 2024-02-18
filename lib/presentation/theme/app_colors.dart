@@ -26,3 +26,30 @@ class AppColors {
 
   static const Color error = Color(0xFFf10300);
 }
+
+class AppColorsStrings {
+  const AppColorsStrings._();
+
+  static const String primary1000 = '0xFF000080';
+  static const String primary900 = '0xFF0000D6';
+  static const String primary800 = '0xFF1C00DB';
+  static const String primary700 = '0xFF3D00E0';
+  static const String primary600 = '0xFF5300E8';
+  static const String primary500 = '0xFF6002EE';
+  static const String primary400 = '0xFF7E3FF2';
+  static const String primary300 = '0xFF9965F4';
+  static const String primary200 = '0xFFB794F6';
+  static const String primary100 = '0xFFD4BFF9';
+  static const String primary50 = '0xFFEFE5FD';
+
+  static const String complementary800 = '0xFF09AF00';
+  static const String complementary400 = '0xFF90EE02';
+
+  static const String analogous700 = '0xFF021AEE';
+  static const String analogous400 = '0xFFD602EE';
+
+  static const String triadic400 = '0xFFEE0290';
+  static const String triadic800 = '0xFFEE6002';
+
+  static const String error = '0xFFF10300';
+}

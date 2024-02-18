@@ -19,11 +19,11 @@ class TaskCategoryDto with _$TaskCategoryDto {
         tasks: [],
       );
 
-  factory TaskCategoryDto.general() => const TaskCategoryDto(
-        name: 'General',
-        color: '0xFF021aee',
-        tasks: [],
-      );
+  bool get isGeneralCategory => name.toLowerCase() == 'general';
+
+  bool get isTodayCategory => name.toLowerCase() == 'today';
+
+  bool get isAllTasksCategory => name.toLowerCase() == 'all tasks';
 
   int get completedTasks => tasks.where((task) => task.isCompleted).length;
 }

@@ -2,6 +2,8 @@ import 'package:how_about_now/data/dto/task_category_dto.dart';
 import 'package:how_about_now/data/dto/task_dto.dart';
 import 'package:how_about_now/domain/data_source/tasks_data_source.dart';
 import 'package:how_about_now/domain/repositories/tasks_repository.dart';
+import 'package:how_about_now/presentation/theme/app_colors.dart';
+import 'package:how_about_now/presentation/utils/enums/date_utils.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: TasksRepository)
@@ -72,8 +74,21 @@ class TasksRepositoryImpl implements TasksRepository {
           categoriesList.add(newCategory);
         }
       }
+      final containsGeneral = allTasks.any((task) => task.hasGeneralCategory);
+      if (!containsGeneral) {
+        categoriesList.insert(
+          0,
+          const TaskCategoryDto(name: 'General', tasks: [], color: AppColorsStrings.analogous700),
+        );
+      }
+      categoriesList
+        ..sort((a, b) => a.name.compareTo(b.name))
+        ..insert(0, TaskCategoryDto(name: 'All Tasks', tasks: allTasks, color: AppColorsStrings.primary300));
 
-      categoriesList.sort((a, b) => a.name.compareTo(b.name));
+      final todayTasks = allTasks.where((task) => isToday(task.date.toIso8601String())).toList();
+      if (todayTasks.isNotEmpty) {
+        categoriesList.insert(0, TaskCategoryDto(name: 'Today', tasks: todayTasks, color: AppColorsStrings.triadic800));
+      }
 
       return categoriesList;
     } catch (e) {

@@ -1,5 +1,6 @@
 import 'package:how_about_now/data/dto/task_category_dto.dart';
 import 'package:how_about_now/data/dto/task_dto.dart';
+import 'package:how_about_now/presentation/theme/app_colors.dart';
 
 const String userId = '37b7e574-4228-4ef1-8b1b-99eff4a15d00';
 
@@ -30,5 +31,26 @@ final taskCategoryV2 = TaskCategoryDto(
   color: '0xFF09af00',
   tasks: [taskDtoV2],
 );
+
+final taskForToday = TaskDto(
+  id: '1',
+  title: 'Task for today',
+  date: DateTime.now(),
+  category: 'Work',
+  color: AppColorsStrings.primary500,
+  isCompleted: false,
+);
+
 final taskCategoriesList = [taskCategoryV1, taskCategoryV2];
 final tasksListV1 = [taskDtoV1, taskDtoV2];
+final tasksLongListV1 = [
+  taskDtoV1,
+  taskDtoV1,
+  taskDtoV1,
+  taskDtoV1,
+  taskDtoV1,
+  taskDtoV2,
+  taskDtoV2,
+  taskDtoV2,
+  taskDtoV2,
+];

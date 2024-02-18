@@ -1,7 +1,7 @@
 {
   "homePage_categories": "Categories",
   "homePage_todayTasks": "Today's tasks: {String}",
-  "homePage_doneTasks": "Done:",
+  "homePage_doneTasks": "Done: {int} / {double}",
   "addTaskPage_generalGroup": "General",
   "addTaskPage_textFieldLabel": "Enter new task",
   "addTaskCategory_textFieldLabel": "Enter new category name",
