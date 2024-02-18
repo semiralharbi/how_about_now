@@ -13,6 +13,15 @@ final taskDtoV1 = TaskDto(
   isCompleted: false,
 );
 
+final completedTaskDtoV1 = TaskDto(
+  id: '1',
+  title: 'Test Task',
+  category: 'General',
+  color: '0xFF000080',
+  date: DateTime(2025, 1, 10),
+  isCompleted: true,
+);
+
 final taskDtoV2 = TaskDto(
   id: '2',
   title: 'Test Task2',

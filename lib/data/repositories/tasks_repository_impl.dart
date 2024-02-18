@@ -95,4 +95,13 @@ class TasksRepositoryImpl implements TasksRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> completeTask({required String id, required bool isCompleted}) {
+    try {
+      return _tasksDataSource.completeTask(id: id, isCompleted: isCompleted);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

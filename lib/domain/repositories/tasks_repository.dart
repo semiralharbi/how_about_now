@@ -6,6 +6,8 @@ abstract class TasksRepository {
 
   Future<List<TaskDto>> getTasks();
 
+  Future<void> completeTask({required String id, required bool isCompleted});
+
   Future<List<TaskCategoryDto>> getTasksCategories();
 
   Future<List<TaskDto>> getTasksByCategory(String category);

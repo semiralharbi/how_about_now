@@ -27,4 +27,12 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeState.error(e.error));
     }
   }
+
+  Future<void> completeTask({required String taskId, required bool isCompleted}) async {
+    try {
+      await _tasksRepository.completeTask(id: taskId, isCompleted: isCompleted);
+    } on ApiException catch (e) {
+      emit(HomeState.error(e.error));
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:how_about_now/data/dto/task_dto.dart';
+import 'package:how_about_now/presentation/pages/home_page/cubit/home_cubit.dart';
 import 'package:how_about_now/presentation/theme/app_colors.dart';
 import 'package:how_about_now/presentation/utils/enums/context_extensions.dart';
 import 'package:how_about_now/presentation/widgets/custom_checkbox.dart';
@@ -36,6 +38,7 @@ class _TaskListTileState extends State<TaskListTile> {
               setState(() {
                 _checkboxValue = !_checkboxValue;
               });
+              context.read<HomeCubit>().completeTask(taskId: widget.task.id, isCompleted: _checkboxValue);
             },
             contentPadding: const EdgeInsets.only(left: 12),
             leading: CustomCheckbox(checkboxValue: _checkboxValue),

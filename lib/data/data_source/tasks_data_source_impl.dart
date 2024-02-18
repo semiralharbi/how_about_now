@@ -63,4 +63,15 @@ class TasksDataSourceImpl extends TasksDataSource {
       throw ApiException(Errors.somethingWentWrong);
     }
   }
+
+  @override
+  Future<void> completeTask({required String id, required bool isCompleted}) async {
+    try {
+      final userId = _sharedPreferences.getString(SharedPreferencesConsts.userIdKey);
+      await _firestore.collection(userId!).doc(id).update({'isCompleted': isCompleted});
+    } catch (e, stack) {
+      debugPrint('There was an error while updating the task: $e, stack: $stack');
+      throw ApiException(Errors.somethingWentWrong);
+    }
+  }
 }
