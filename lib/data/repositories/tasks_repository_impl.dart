@@ -77,7 +77,9 @@ class TasksRepositoryImpl implements TasksRepository {
       final containsGeneral = allTasks.any((task) => task.hasGeneralCategory);
       if (!containsGeneral) {
         categoriesList.insert(
-            0, const TaskCategoryDto(name: 'General', tasks: [], color: AppColorsStrings.analogous700));
+          0,
+          const TaskCategoryDto(name: 'General', tasks: [], color: AppColorsStrings.analogous700),
+        );
       }
       categoriesList
         ..sort((a, b) => a.name.compareTo(b.name))

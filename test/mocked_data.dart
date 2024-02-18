@@ -52,5 +52,5 @@ final tasksLongListV1 = [
   taskDtoV2,
   taskDtoV2,
   taskDtoV2,
-  taskDtoV2
+  taskDtoV2,
 ];
