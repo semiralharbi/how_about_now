@@ -5,7 +5,12 @@ import 'package:how_about_now/presentation/utils/enums/colors_utils.dart';
 import 'package:how_about_now/presentation/utils/global_imports.dart';
 
 class AddTaskCategoryDialog extends StatefulWidget {
-  const AddTaskCategoryDialog({super.key});
+  const AddTaskCategoryDialog({
+    super.key,
+    required this.onAddTap,
+  });
+
+  final void Function(String addedCategory, String color) onAddTap;
 
   @override
   State<AddTaskCategoryDialog> createState() => _AddTaskCategoryDialogState();
@@ -60,7 +65,10 @@ class _AddTaskCategoryDialogState extends State<AddTaskCategoryDialog> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.onAddTap(_controller.text, _selectedColor.value.toString());
+                    context.router.pop();
+                  },
                   child: Text(
                     getIt<TestsManager>().duringTestExecution ? 'Add' : context.tr.generic_add,
                   ),
