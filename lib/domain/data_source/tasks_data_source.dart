@@ -5,6 +5,8 @@ abstract class TasksDataSource {
 
   Future<List<TaskDto>> getTasks();
 
+  Future<void> completeTask({required String id, required bool isCompleted});
+
   Future<void> deleteTask(String id);
 
   Future<List<TaskDto>> getTasksByCategory(String category);

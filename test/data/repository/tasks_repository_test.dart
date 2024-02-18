@@ -62,6 +62,29 @@ void main() {
       expect(categories.length, greaterThanOrEqualTo(3));
     });
 
+    test('calls completeTask on tasksDataSource with correct parameters', () async {
+      const String testId = 'testId';
+      const bool testIsCompleted = true;
+      when(mockDataSource.completeTask(id: anyNamed('id'), isCompleted: anyNamed('isCompleted')))
+          .thenAnswer((_) async {});
+
+      await repository.completeTask(id: testId, isCompleted: testIsCompleted);
+
+      verify(mockDataSource.completeTask(id: testId, isCompleted: testIsCompleted));
+    });
+
+    test('rethrows any exception that occurs when calling completeTask', () {
+      const String testId = 'testId';
+      const bool testIsCompleted = true;
+      when(mockDataSource.completeTask(id: anyNamed('id'), isCompleted: anyNamed('isCompleted')))
+          .thenThrow(ApiException(Errors.somethingWentWrong));
+
+      expect(
+        () async => repository.completeTask(id: testId, isCompleted: testIsCompleted),
+        throwsA(isA<ApiException>()),
+      );
+    });
+
     test('createTask propagates exception from DataSource', () async {
       when(mockDataSource.createTask(any)).thenThrow(ApiException(Errors.somethingWentWrong));
 

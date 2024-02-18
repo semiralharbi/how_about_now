@@ -1,7 +1,6 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:how_about_now/data/data_source/tasks_data_source_impl.dart';
-import 'package:how_about_now/domain/utils/shared_preferences_consts.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helpers/firebase_testing_helpers.dart';
@@ -18,11 +17,10 @@ void main() {
       mockFirestore = FakeFirebaseFirestore();
       mockSharedPreferences = MockSharedPreferences();
       dataSource = TasksDataSourceImpl(mockFirestore, mockSharedPreferences);
+      when(mockSharedPreferences.getString(any)).thenReturn(userId);
     });
 
     test('createTask creates a task in FirebaseFirestore', () async {
-      when(mockSharedPreferences.getString(any)).thenReturn(userId);
-
       await dataSource.createTask(taskDtoV1);
       await expectFirestoreGetCall(
         fakeFirebaseFirestore: mockFirestore,
@@ -34,7 +32,6 @@ void main() {
     });
 
     test('deleteTask deletes task by id from FirebaseFirestore', () async {
-      when(mockSharedPreferences.getString(any)).thenReturn(userId);
       await expectFirestoreSetCall(
         fakeFirebaseFirestore: mockFirestore,
         data: taskDtoV1.toJson(),
@@ -59,7 +56,6 @@ void main() {
           docPath: task.id,
         );
       }
-      when(mockSharedPreferences.getString(SharedPreferencesConsts.userIdKey)).thenReturn(userId);
       final result = await dataSource.getTasks();
 
       expect(result, tasksListV1);
@@ -73,10 +69,35 @@ void main() {
           docPath: task.id,
         );
       }
-      when(mockSharedPreferences.getString(SharedPreferencesConsts.userIdKey)).thenReturn(userId);
       final result = await dataSource.getTasksByCategory(tasksListV1.first.category);
 
       expect(result, [taskDtoV1]);
+    });
+
+    test('updates task completion status successfully', () async {
+      for (final task in tasksListV1) {
+        await expectFirestoreSetCall(
+          fakeFirebaseFirestore: mockFirestore,
+          data: task.toJson(),
+          docPath: task.id,
+        );
+      }
+
+      await expectFirestoreGetCall(
+        fakeFirebaseFirestore: mockFirestore,
+        matcher: taskDtoV1.toJson(),
+        docPath: tasksListV1.first.id,
+      );
+
+      await dataSource.completeTask(id: tasksListV1.first.id, isCompleted: true);
+
+      verify(mockSharedPreferences.getString(any));
+
+      await expectFirestoreGetCall(
+        fakeFirebaseFirestore: mockFirestore,
+        matcher: completedTaskDtoV1.toJson(),
+        docPath: tasksListV1.first.id,
+      );
     });
   });
 }

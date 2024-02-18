@@ -1415,6 +1415,24 @@ class MockTasksRepository extends _i1.Mock implements _i14.TasksRepository {
       ) as _i5.Future<List<_i15.TaskDto>>);
 
   @override
+  _i5.Future<void> completeTask({
+    required String? id,
+    required bool? isCompleted,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #completeTask,
+          [],
+          {
+            #id: id,
+            #isCompleted: isCompleted,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
   _i5.Future<List<_i16.TaskCategoryDto>> getTasksCategories() => (super.noSuchMethod(
         Invocation.method(
           #getTasksCategories,
@@ -1469,6 +1487,24 @@ class MockTasksDataSource extends _i1.Mock implements _i17.TasksDataSource {
         ),
         returnValue: _i5.Future<List<_i15.TaskDto>>.value(<_i15.TaskDto>[]),
       ) as _i5.Future<List<_i15.TaskDto>>);
+
+  @override
+  _i5.Future<void> completeTask({
+    required String? id,
+    required bool? isCompleted,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #completeTask,
+          [],
+          {
+            #id: id,
+            #isCompleted: isCompleted,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   _i5.Future<void> deleteTask(String? id) => (super.noSuchMethod(
@@ -1736,6 +1772,24 @@ class MockHomeCubit extends _i1.Mock implements _i8.HomeCubit {
         Invocation.method(
           #getTasks,
           [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> completeTask({
+    required String? taskId,
+    required bool? isCompleted,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #completeTask,
+          [],
+          {
+            #taskId: taskId,
+            #isCompleted: isCompleted,
+          },
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
