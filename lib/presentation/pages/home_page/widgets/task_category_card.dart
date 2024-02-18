@@ -59,7 +59,7 @@ class TaskCategoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Done: $completedCount/$tasksCount',
+                    context.tr.homePage_doneTasks(completedCount, tasksCount),
                     style: context.tht.bodyMedium?.copyWith(
                       color: AppColors.primary50,
                       fontWeight: FontWeight.w500,

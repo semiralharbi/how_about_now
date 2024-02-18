@@ -40,6 +40,15 @@ void main() {
       await tester.drag(taskListTile.at(1), const Offset(0, -200), warnIfMissed: false);
       return;
     },
-    builder: buildPage,
+    builder: () {
+      when(mockHomeCubit.state)
+          .thenAnswer((_) => HomeState.loaded(tasks: tasksLongListV1, categories: taskCategoriesList));
+      when(mockHomeCubit.stream).thenAnswer(
+        (_) => Stream.value(
+          HomeState.loaded(tasks: tasksLongListV1, categories: taskCategoriesList),
+        ),
+      );
+      return buildPage();
+    },
   );
 }

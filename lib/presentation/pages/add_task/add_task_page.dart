@@ -48,10 +48,7 @@ class _BodyState extends State<_Body> {
   void initState() {
     super.initState();
     _taskTitleController = TextEditingController();
-    _selectedTaskCategory = widget.categories.firstWhere(
-      (category) => category.name == 'General',
-      orElse: TaskCategoryDto.general,
-    );
+    _selectedTaskCategory = widget.categories.firstWhere((category) => category.isGeneralCategory);
   }
 
   @override

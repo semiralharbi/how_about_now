@@ -19,7 +19,7 @@ class LinearPercentIndicator extends StatelessWidget {
       ),
       child: const ColoredBox(
         color: AppColors.complementary800,
-      ).animate().slideX(duration: 500.ms, begin: -1, end: (percent * 1) - 1),
+      ).animate().slideX(duration: 500.ms, begin: -1, end: (percent.isNaN ? 0 : percent * 1) - 1),
     );
   }
 }
