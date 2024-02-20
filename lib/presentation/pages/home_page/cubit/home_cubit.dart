@@ -40,4 +40,12 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeState.error(e.error));
     }
   }
+
+  Future<void> deleteTask(String taskId) async {
+    try {
+      await _tasksRepository.deleteTask(taskId);
+    } on ApiException catch (e) {
+      emit(HomeState.error(e.error));
+    }
+  }
 }

@@ -78,6 +78,16 @@ class Translation {
     );
   }
 
+  /// `Category: {String}`
+  String homePage_taskCategory(Object String) {
+    return Intl.message(
+      'Category: $String',
+      name: 'homePage_taskCategory',
+      desc: '',
+      args: [String],
+    );
+  }
+
   /// `General`
   String get addTaskPage_generalGroup {
     return Intl.message(

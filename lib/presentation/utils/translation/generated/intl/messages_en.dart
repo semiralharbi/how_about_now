@@ -22,7 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(int, double) => "Done: ${int} / ${double}";
 
-  static String m1(String) => "Today\'s tasks: ${String}";
+  static String m1(String) => "Category: ${String}";
+
+  static String m2(String) => "Today\'s tasks: ${String}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -43,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "generic_userNotFound": MessageLookupByLibrary.simpleMessage("User not found"),
         "homePage_categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "homePage_doneTasks": m0,
-        "homePage_todayTasks": m1
+        "homePage_taskCategory": m1,
+        "homePage_todayTasks": m2
       };
 }
