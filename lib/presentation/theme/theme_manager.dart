@@ -33,9 +33,10 @@ class ThemeManager {
         textStyle: MaterialStateProperty.all(_lightThemeText.bodyLarge),
       ),
     ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      shape: CircleBorder(
-        side: BorderSide(
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(
           width: 6,
           color: AppColors.primary300,
         ),

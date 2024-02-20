@@ -94,6 +94,7 @@ class TaskCategoryDropdownState extends State<TaskCategoryDropdown> {
               setState(() {
                 _categories.add(createdCategory);
                 _initialCategory = createdCategory;
+                widget.onSelectedCategory(_initialCategory);
               });
             },
           ),

@@ -6,25 +6,17 @@ import 'package:how_about_now/presentation/pages/home_page/widgets/task_category
 import 'package:how_about_now/presentation/pages/home_page/widgets/task_list_tile.dart';
 import 'package:how_about_now/presentation/utils/global_imports.dart';
 import 'package:how_about_now/presentation/utils/router/app_router.dart';
-import 'package:how_about_now/presentation/widgets/custom_bottom_navigation_bar.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 @RoutePage()
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key, this.cubit});
 
   final HomeCubit? cubit;
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _activeTabIndex = 0;
-
-  @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) => widget.cubit ?? getIt<HomeCubit>()
+        create: (context) => cubit ?? getIt<HomeCubit>()
           ..getTasks(),
         child: Scaffold(
           floatingActionButton: BlocSelector<HomeCubit, HomeState, List<TaskCategoryDto>>(
@@ -32,31 +24,20 @@ class _HomePageState extends State<HomePage> {
               orElse: () => [],
               loaded: (_, categories) => categories,
             ),
-            builder: (context, categories) {
-              return FloatingActionButton(
+            builder: (context, categories) => Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: FloatingActionButton(
                 onPressed: () async {
                   final result = await context.router.push(AddTaskRoute(categories: categories)) as bool? ?? false;
-                  if (result && mounted) {
+                  if (result && context.mounted) {
                     await context.read<HomeCubit>().getTasks();
                   }
                 },
                 child: const Icon(Icons.add, size: 28),
-              );
-            },
+              ).animate(delay: 500.ms).scale(duration: 500.ms),
+            ),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: CustomBottomNavigationBar(
-            onTap: (index) {
-              setState(() {
-                _activeTabIndex = index;
-              });
-            },
-            activeIndex: _activeTabIndex,
-            icons: const [
-              Icons.access_time_rounded,
-              Icons.home_outlined,
-            ],
-          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           body: const _Body(),
         ),
       );
