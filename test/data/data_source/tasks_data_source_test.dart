@@ -48,17 +48,30 @@ void main() {
       verify(mockSharedPreferences.getString(any));
     });
 
-    test('getTasks fetches all user tasks from FirebaseFirestore', () async {
-      for (final task in tasksListV1) {
+    test('getTasks fetches today user tasks from FirebaseFirestore', () async {
+      for (final task in [taskForToday, taskDtoV1, taskDtoV2]) {
         await expectFirestoreSetCall(
           fakeFirebaseFirestore: mockFirestore,
           data: task.toJson(),
           docPath: task.id,
         );
       }
-      final result = dataSource.getTasks();
+      final result = dataSource.getTodayTasks();
 
-      expect(await result.first, tasksListV1);
+      expect(await result.first, [taskForToday]);
+    });
+
+    test('getTasks fetches all user tasks from FirebaseFirestore', () async {
+      for (final task in tasksLongListV1) {
+        await expectFirestoreSetCall(
+          fakeFirebaseFirestore: mockFirestore,
+          data: task.toJson(),
+          docPath: task.id,
+        );
+      }
+      final result = dataSource.getAllTasks();
+
+      expect(await result.first, tasksLongListV1);
     });
 
     test('getTasksByCategory fetches tasks by category from FirebaseFirestore', () async {
@@ -69,9 +82,9 @@ void main() {
           docPath: task.id,
         );
       }
-      final result = await dataSource.getTasksByCategory(tasksListV1.first.category);
+      final result = dataSource.getTasksByCategory(tasksListV1.first.category);
 
-      expect(result, [taskDtoV1]);
+      expect(await result.first, [taskDtoV1]);
     });
 
     test('updates task completion status successfully', () async {

@@ -7,6 +7,7 @@ class HomeState with _$HomeState {
   const factory HomeState.loaded({
     required List<TaskDto> tasks,
     required List<TaskCategoryDto> categories,
+    required String selectedCategory,
   }) = _Loaded;
 
   const factory HomeState.error(Errors error) = _Error;

@@ -28,7 +28,7 @@ void main() {
       act: (cubit) => cubit.getTasks(),
       expect: () => <HomeState>[
         const HomeState.loading(),
-        HomeState.loaded(tasks: tasksListV1, categories: taskCategoriesList),
+        HomeState.loaded(tasks: tasksListV1, categories: taskCategoriesList, selectedCategory: 'Today'),
       ],
       verify: (_) {
         verify(mockRepository.getTasks());
