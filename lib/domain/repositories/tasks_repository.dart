@@ -10,7 +10,7 @@ abstract class TasksRepository {
 
   Future<List<TaskCategoryDto>> getTasksCategories();
 
-  Future<List<TaskDto>> getTasksByCategory(String category);
+  Stream<List<TaskDto>> getTasksByCategory(String category);
 
   Future<void> deleteTask(String id);
 }

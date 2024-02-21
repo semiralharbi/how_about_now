@@ -4,6 +4,7 @@ import 'package:how_about_now/data/dto/task_dto.dart';
 import 'package:how_about_now/domain/data_source/tasks_data_source.dart';
 import 'package:how_about_now/domain/utils/exception.dart';
 import 'package:how_about_now/domain/utils/shared_preferences_consts.dart';
+import 'package:how_about_now/presentation/utils/enums/date_utils.dart';
 import 'package:how_about_now/presentation/utils/enums/errors.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,7 +41,20 @@ class TasksDataSourceImpl extends TasksDataSource {
   }
 
   @override
-  Stream<List<TaskDto>> getTasks() {
+  Stream<List<TaskDto>> getTodayTasks() {
+    try {
+      final userId = _sharedPreferences.getString(SharedPreferencesConsts.userIdKey);
+      final snapshot = _firestore.collection(userId!).snapshots();
+      final allTasksStream = snapshot.map((event) => event.docs.map((e) => TaskDto.fromJson(e.data())).toList());
+      return allTasksStream.map((tasks) => tasks.where((task) => isToday(task.date.toIso8601String())).toList());
+    } catch (e, stack) {
+      debugPrint('There was an error while fetching tasks: $e, stack: $stack');
+      throw ApiException(Errors.somethingWentWrong);
+    }
+  }
+
+  @override
+  Stream<List<TaskDto>> getAllTasks() {
     try {
       final userId = _sharedPreferences.getString(SharedPreferencesConsts.userIdKey);
       final snapshot = _firestore.collection(userId!).snapshots();
@@ -52,12 +66,11 @@ class TasksDataSourceImpl extends TasksDataSource {
   }
 
   @override
-  Future<List<TaskDto>> getTasksByCategory(String category) async {
+  Stream<List<TaskDto>> getTasksByCategory(String category) {
     try {
       final userId = _sharedPreferences.getString(SharedPreferencesConsts.userIdKey);
-      final snapshot = await _firestore.collection(userId!).where(_categoryField, isEqualTo: category).get();
-      final tasks = snapshot.docs.map((e) => TaskDto.fromJson(e.data())).toList();
-      return tasks;
+      final snapshot = _firestore.collection(userId!).where(_categoryField, isEqualTo: category).snapshots();
+      return snapshot.map((event) => event.docs.map((e) => TaskDto.fromJson(e.data())).toList());
     } catch (e, stack) {
       debugPrint('There was an error while fetching tasks by category: $e, stack: $stack');
       throw ApiException(Errors.somethingWentWrong);

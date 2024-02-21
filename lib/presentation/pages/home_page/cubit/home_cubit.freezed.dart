@@ -19,21 +19,21 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories) loaded,
+    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory) loaded,
     required TResult Function(Errors error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult? Function(Errors error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult Function(Errors error)? error,
     required TResult orElse(),
   }) =>
@@ -111,7 +111,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories) loaded,
+    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory) loaded,
     required TResult Function(Errors error) error,
   }) {
     return loading();
@@ -121,7 +121,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult? Function(Errors error)? error,
   }) {
     return loading?.call();
@@ -131,7 +131,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult Function(Errors error)? error,
     required TResult orElse(),
   }) {
@@ -185,7 +185,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
   factory _$$LoadedImplCopyWith(_$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TaskDto> tasks, List<TaskCategoryDto> categories});
+  $Res call({List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory});
 }
 
 /// @nodoc
@@ -198,6 +198,7 @@ class __$$LoadedImplCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res, _$L
   $Res call({
     Object? tasks = null,
     Object? categories = null,
+    Object? selectedCategory = null,
   }) {
     return _then(_$LoadedImpl(
       tasks: null == tasks
@@ -208,6 +209,10 @@ class __$$LoadedImplCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res, _$L
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<TaskCategoryDto>,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -215,7 +220,10 @@ class __$$LoadedImplCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res, _$L
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({required final List<TaskDto> tasks, required final List<TaskCategoryDto> categories})
+  const _$LoadedImpl(
+      {required final List<TaskDto> tasks,
+      required final List<TaskCategoryDto> categories,
+      required this.selectedCategory})
       : _tasks = tasks,
         _categories = categories;
 
@@ -236,8 +244,11 @@ class _$LoadedImpl implements _Loaded {
   }
 
   @override
+  final String selectedCategory;
+
+  @override
   String toString() {
-    return 'HomeState.loaded(tasks: $tasks, categories: $categories)';
+    return 'HomeState.loaded(tasks: $tasks, categories: $categories, selectedCategory: $selectedCategory)';
   }
 
   @override
@@ -246,12 +257,13 @@ class _$LoadedImpl implements _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            const DeepCollectionEquality().equals(other._categories, _categories));
+            const DeepCollectionEquality().equals(other._categories, _categories) &&
+            (identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_tasks), const DeepCollectionEquality().hash(_categories));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks),
+      const DeepCollectionEquality().hash(_categories), selectedCategory);
 
   @JsonKey(ignore: true)
   @override
@@ -262,32 +274,32 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories) loaded,
+    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory) loaded,
     required TResult Function(Errors error) error,
   }) {
-    return loaded(tasks, categories);
+    return loaded(tasks, categories, selectedCategory);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult? Function(Errors error)? error,
   }) {
-    return loaded?.call(tasks, categories);
+    return loaded?.call(tasks, categories, selectedCategory);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult Function(Errors error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(tasks, categories);
+      return loaded(tasks, categories, selectedCategory);
     }
     return orElse();
   }
@@ -328,11 +340,14 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements HomeState {
-  const factory _Loaded({required final List<TaskDto> tasks, required final List<TaskCategoryDto> categories}) =
-      _$LoadedImpl;
+  const factory _Loaded(
+      {required final List<TaskDto> tasks,
+      required final List<TaskCategoryDto> categories,
+      required final String selectedCategory}) = _$LoadedImpl;
 
   List<TaskDto> get tasks;
   List<TaskCategoryDto> get categories;
+  String get selectedCategory;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith => throw _privateConstructorUsedError;
 }
@@ -396,7 +411,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories) loaded,
+    required TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory) loaded,
     required TResult Function(Errors error) error,
   }) {
     return error(this.error);
@@ -406,7 +421,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult? Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult? Function(Errors error)? error,
   }) {
     return error?.call(this.error);
@@ -416,7 +431,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories)? loaded,
+    TResult Function(List<TaskDto> tasks, List<TaskCategoryDto> categories, String selectedCategory)? loaded,
     TResult Function(Errors error)? error,
     required TResult orElse(),
   }) {

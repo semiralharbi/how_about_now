@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
           floatingActionButton: BlocSelector<HomeCubit, HomeState, List<TaskCategoryDto>>(
             selector: (state) => state.maybeWhen(
               orElse: () => [],
-              loaded: (_, categories) => categories,
+              loaded: (_, categories, __) => categories,
             ),
             builder: (context, categories) => Padding(
               padding: const EdgeInsets.only(right: 8),
@@ -107,7 +107,7 @@ class _BodyState extends State<_Body> {
                           itemBuilder: (_, __) => TaskCategoryCard.skeleton(),
                         ),
                       ),
-                      loaded: (_, categories) => ListView.builder(
+                      loaded: (_, categories, __) => ListView.builder(
                         itemCount: categories.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (_, index) {
@@ -132,9 +132,9 @@ class _BodyState extends State<_Body> {
           BlocSelector<HomeCubit, HomeState, String>(
             selector: (state) => state.maybeWhen(
               orElse: () => '',
-              loaded: (tasks, _) => '${tasks.length}',
+              loaded: (tasks, _, selectedCategory) => '$selectedCategory tasks: ${tasks.length}',
             ),
-            builder: (context, tasksAmount) {
+            builder: (context, text) {
               return SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -143,7 +143,7 @@ class _BodyState extends State<_Body> {
                     children: [
                       const Divider(height: 20),
                       Text(
-                        context.tr.homePage_todayTasks(tasksAmount),
+                        text,
                         style: context.tht.bodyLarge,
                       ),
                     ],
@@ -159,10 +159,13 @@ class _BodyState extends State<_Body> {
                 child: Center(child: CircularProgressIndicator()),
               ),
             ),
-            loaded: (tasks, _) => SliverList(
+            loaded: (tasks, _, __) => SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: tasks.length,
-                (_, index) => TaskListTile(task: tasks[index]),
+                (_, index) => TaskListTile(
+                  task: tasks[index],
+                  key: ValueKey(tasks[index].id),
+                ),
               ),
             ),
           ),

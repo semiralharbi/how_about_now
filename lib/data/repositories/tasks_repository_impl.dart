@@ -4,6 +4,7 @@ import 'package:how_about_now/domain/data_source/tasks_data_source.dart';
 import 'package:how_about_now/domain/repositories/tasks_repository.dart';
 import 'package:how_about_now/presentation/theme/app_colors.dart';
 import 'package:how_about_now/presentation/utils/enums/date_utils.dart';
+import 'package:how_about_now/presentation/utils/enums/string_extensions.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: TasksRepository)
@@ -33,15 +34,21 @@ class TasksRepositoryImpl implements TasksRepository {
   @override
   Stream<List<TaskDto>> getTasks() {
     try {
-      return _tasksDataSource.getTasks();
+      return _tasksDataSource.getTodayTasks();
     } catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<List<TaskDto>> getTasksByCategory(String category) {
+  Stream<List<TaskDto>> getTasksByCategory(String category) {
     try {
+      if (category.isToday) {
+        return _tasksDataSource.getTodayTasks();
+      }
+      if (category.isAllTasks) {
+        return _tasksDataSource.getAllTasks();
+      }
       return _tasksDataSource.getTasksByCategory(category);
     } catch (_) {
       rethrow;
@@ -51,7 +58,7 @@ class TasksRepositoryImpl implements TasksRepository {
   @override
   Future<List<TaskCategoryDto>> getTasksCategories() async {
     try {
-      final allTasks = await _tasksDataSource.getTasks().first;
+      final allTasks = await _tasksDataSource.getAllTasks().first;
 
       final List<TaskCategoryDto> categoriesList = [];
 

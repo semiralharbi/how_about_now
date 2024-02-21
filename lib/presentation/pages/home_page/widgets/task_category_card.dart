@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gap/gap.dart';
-import 'package:how_about_now/presentation/theme/app_colors.dart';
-import 'package:how_about_now/presentation/utils/enums/context_extensions.dart';
+import 'package:how_about_now/presentation/pages/home_page/cubit/home_cubit.dart';
+import 'package:how_about_now/presentation/utils/global_imports.dart';
 import 'package:how_about_now/presentation/widgets/linear_percent_indicator.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -29,51 +26,54 @@ class TaskCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      elevation: 3,
-      color: Color(int.parse(color)),
-      margin: const EdgeInsets.only(right: 10, bottom: 8),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: SizedBox(
-          width: 136,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: context.tht.bodyLarge?.copyWith(
-                      color: AppColors.primary50,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1,
+    return GestureDetector(
+      onTap: () => context.read<HomeCubit>().getTasksByCategory(title),
+      child: Card(
+        clipBehavior: Clip.hardEdge,
+        elevation: 3,
+        color: Color(int.parse(color)),
+        margin: const EdgeInsets.only(right: 10, bottom: 8),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: SizedBox(
+            width: 136,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: context.tht.bodyLarge?.copyWith(
+                        color: AppColors.primary50,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                      ),
+                    ).animate().fadeIn(),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      context.tr.homePage_doneTasks(completedCount, tasksCount),
+                      style: context.tht.bodyMedium?.copyWith(
+                        color: AppColors.primary50,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ).animate().fadeIn(),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.tr.homePage_doneTasks(completedCount, tasksCount),
-                    style: context.tht.bodyMedium?.copyWith(
-                      color: AppColors.primary50,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1,
+                    const Gap(6),
+                    Skeleton.leaf(
+                      child: LinearPercentIndicator(percent: completedCount / tasksCount),
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const Gap(6),
-                  Skeleton.leaf(
-                    child: LinearPercentIndicator(percent: completedCount / tasksCount),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

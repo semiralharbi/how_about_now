@@ -13,3 +13,9 @@ extension StringToSnakeCase on String {
     return snakeCaseStr.toLowerCase();
   }
 }
+
+extension CategoryTypeExtension on String {
+  bool get isToday => toLowerCase() == 'today';
+
+  bool get isAllTasks => toLowerCase() == 'all tasks';
+}

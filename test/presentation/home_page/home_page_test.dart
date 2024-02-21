@@ -14,10 +14,20 @@ void main() {
   late MockHomeCubit mockHomeCubit;
   setUp(() {
     mockHomeCubit = MockHomeCubit();
-    when(mockHomeCubit.state).thenAnswer((_) => HomeState.loaded(tasks: tasksListV1, categories: taskCategoriesList));
+    when(mockHomeCubit.state).thenAnswer(
+      (_) => HomeState.loaded(
+        tasks: tasksListV1,
+        categories: taskCategoriesList,
+        selectedCategory: 'Today',
+      ),
+    );
     when(mockHomeCubit.stream).thenAnswer(
       (_) => Stream.value(
-        HomeState.loaded(tasks: tasksListV1, categories: taskCategoriesList),
+        HomeState.loaded(
+          tasks: tasksListV1,
+          categories: taskCategoriesList,
+          selectedCategory: 'Today',
+        ),
       ),
     );
     when(mockHomeCubit.close()).thenAnswer((_) async {});
@@ -41,11 +51,20 @@ void main() {
       return;
     },
     builder: () {
-      when(mockHomeCubit.state)
-          .thenAnswer((_) => HomeState.loaded(tasks: tasksLongListV1, categories: taskCategoriesList));
+      when(mockHomeCubit.state).thenAnswer(
+        (_) => HomeState.loaded(
+          tasks: tasksLongListV1,
+          categories: taskCategoriesList,
+          selectedCategory: 'Today',
+        ),
+      );
       when(mockHomeCubit.stream).thenAnswer(
         (_) => Stream.value(
-          HomeState.loaded(tasks: tasksLongListV1, categories: taskCategoriesList),
+          HomeState.loaded(
+            tasks: tasksLongListV1,
+            categories: taskCategoriesList,
+            selectedCategory: 'Today',
+          ),
         ),
       );
       return buildPage();
